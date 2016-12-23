@@ -1,0 +1,4 @@
+*.js
+*.js.map
+platforms/
+node_modules/

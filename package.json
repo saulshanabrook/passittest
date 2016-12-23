@@ -1,0 +1,57 @@
+{
+  "description": "NativeScript Application",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "readme": "NativeScript Application",
+  "repository": "<fill-your-repository-here>",
+  "scripts": {
+    "postinstall": "npm run fix-randombytes; npm run fix-asn1-install-buffer; npm run fix-simple-asym-install-buffer; npm run fix-simple-asym-buffer; npm run fix-fernet-buffer; npm run fix-pem-jwk-install-crypto; npm run fix-fernet-install-crypto; npm run fix-pem-jwk-crypto; npm run fix-fernet-crypto; npm run fix-asn1-vm",
+    "fix-randombytes": "sed -i.bak 's/index.js/browser.js/' node_modules/randombytes/package.json",
+    "fix-asn1-install-buffer": "find node_modules/ -path '*asn1.js/node_modules/' -exec cp -r node_modules/buffer/ {} \\;",
+    "fix-fernet-install-buffer": "find node_modules/ -path '*fernet/node_modules/' -exec cp -r node_modules/buffer/ {} \\;",
+    "fix-simple-asym-install-buffer": "find node_modules/ -path '*simple-asymmetric-js/node_modules/' -exec cp -r node_modules/buffer/ {} \\;",
+    "fix-fernet-buffer": "find node_modules/ -path '*fernet/fernet.js' -exec sed -i.bak \"s/require('urlsafe-base64');/require('urlsafe-base64'); var Buffer = require('buffer').Buffer;/\" {} \\;",
+    "fix-simple-asym-buffer": "find node_modules/ -path '*simple-asymmetric-js/js/crypto.js' -exec sed -i.bak \"s/require('fernet');/require('fernet'); var Buffer = require('buffer').Buffer;/\" {} \\;",
+    "fix-pem-jwk-install-crypto": "find node_modules/ -path '*pem-jwk/node_modules/' -exec cp -r node_modules/randombytes/ {} \\;",
+    "fix-fernet-install-crypto": "find node_modules/ -path '*fernet/node_modules/' -exec cp -r node_modules/randombytes/ {} \\;",
+    "fix-pem-jwk-crypto": "find node_modules/ -path '*fernet/fernet.js' -exec sed -i.bak \"s/require('crypto')/{randomBytes: require('randombytes')}/\" {} \\;",
+    "fix-fernet-crypto": "find node_modules/ -path '*pem-jwk/factor.js' -exec sed -i.bak \"s/require('crypto')/{randomBytes: require('randombytes')}/\" {} \\;",
+    "fix-asn1-vm": "find node_modules/ -path '*asn1.js/lib/asn1/api.js' -exec sed -i.bak \"s/require('vm')/{runInThisContext: eval}/\" {} \\;"
+  },
+  "nativescript": {
+    "id": "org.nativescript.passittest",
+    "tns-android": {
+      "version": "2.4.1"
+    },
+    "tns-ios": {
+      "version": "2.4.0"
+    }
+  },
+  "dependencies": {
+    "@angular/common": "2.2.1",
+    "@angular/compiler": "2.2.1",
+    "@angular/core": "2.2.1",
+    "@angular/forms": "2.2.1",
+    "@angular/http": "2.2.1",
+    "@angular/platform-browser": "2.2.1",
+    "@angular/platform-browser-dynamic": "2.2.1",
+    "@angular/router": "3.2.1",
+    "buffer": "^5.0.2",
+    "nativescript-angular": "1.2.0",
+    "nativescript-angular-webview-crypto": "0.0.2",
+    "nativescript-theme-core": "^0.2.1",
+    "passit-sdk-js": "^0.1.1",
+    "randombytes": "^2.0.3",
+    "reflect-metadata": "~0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "tns-core-modules": "^2.4.4"
+  },
+  "devDependencies": {
+    "babel-traverse": "6.21.0",
+    "babel-types": "6.21.0",
+    "babylon": "6.14.1",
+    "lazy": "1.0.11",
+    "nativescript-dev-typescript": "^0.3.2",
+    "typescript": "~2.0.10",
+    "zone.js": "~0.6.21"
+  }
+}
