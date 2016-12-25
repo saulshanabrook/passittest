@@ -2,3 +2,4 @@
 *.js.map
 platforms/
 node_modules/
+npm-debug.log*
