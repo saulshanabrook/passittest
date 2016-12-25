@@ -49,7 +49,7 @@ export class AppComponent {
     }
 
     public onTap() {
-      const PassitSDK = require("passit-sdk-js");
+      const PassitSDK = require("passit-sdk-js").default;
       const sdk = new PassitSDK();
       const email = "test@test.com";
       const password = "password";
@@ -66,7 +66,7 @@ export class AppComponent {
         group_id: null,
       }
 
-
+      this.steps = [];
       this.step("Sign up")
       sdk.sign_up(email, password)
 
@@ -79,7 +79,8 @@ export class AppComponent {
       .then(dBSecret => {
         this.step("Decrypt secret");
         sdk.decrypt_secret(dBSecret);
-      }).then(_ => this.done());
+      }).then(_ => this.done())
+      .catch(e => console.log("FAILED!", e));
 
 
       // deepStrictEqual({
