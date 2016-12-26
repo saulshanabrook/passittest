@@ -59,5 +59,6 @@ I assume it must think these are files instead of folders and fails to find them
 logged a bug yet in NativeScript for this behavior. The `fix:asn1:rename` and `fix:bn:rename`
 NPM sripts work around this by renaming troublesome files.
 
-###
+### Exportable Keys
 
+Because of how webview-crypto works, crypto key's have to be imported as exportable. The reason is that we have to send the state of the crypto key from the web view back into the app via a string. So they need to be exportable so we can send them back. However, I think I have to change how webview-crypto works anyway, internally, so this will hopefully be fixed.
