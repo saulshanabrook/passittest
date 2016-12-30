@@ -4,5 +4,5 @@ import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 declare var __enableVerboseLogging: () => undefined;
 
 import { AppModule } from "./app.module";
-__enableVerboseLogging()
+// __enableVerboseLogging()
 platformNativeScriptDynamic().bootstrapModule(AppModule);

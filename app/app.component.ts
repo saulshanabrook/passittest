@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 // import { deepStrictEqual } from "power-assert";
 import 'nativescript-angular-webview-crypto';
+import './btoa-polyfill';
+import './text-encoding-polyfill';
 
 function deepStrictEqual(a, b) {
   console.log(a, b);
@@ -34,15 +36,15 @@ export class AppComponent {
       })
     }
 
-    private get lastStep() {
+    private lastStep() {
       if (this.steps.length === 0) {
         return null;
       }
-      return this.steps[this.step.length - 1];
+      return this.steps[this.steps.length - 1];
     }
 
     private done() {
-      const lastStep = this.lastStep;
+      const lastStep = this.lastStep();
       if (lastStep) {
         lastStep.endTime = Date.now();
       }
@@ -51,7 +53,13 @@ export class AppComponent {
     public onTap() {
       const PassitSDK = require("passit-sdk-js").default;
       const sdk = new PassitSDK();
-      const email = "test@test.com";
+
+      const Api = require("passit-sdk-js/js/api").default;
+      // for genymotion this refers to localhost
+      // http://stackoverflow.com/a/20257547/907060
+      sdk.api = new Api("http://10.0.3.2:8000/api/")
+
+      const email = `test${new Date().getTime()}@test.com`;
       const password = "password";
 
       const newSecret = {

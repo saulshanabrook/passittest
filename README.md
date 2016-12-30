@@ -42,16 +42,19 @@ component that uses the Safari browser.
 
 
 ### Android
-
+Works!
 
 ## Workarounds
 
 ### Node Modules
 Nativescript does not automatically polyfill Node APIs like webpack does.
-So isntead, I have manually installed the required polyfills and used `grep`
+So instead, I have manually installed the required polyfills and used `grep`
 after the `npm install` to install them on the dependencies. These  are the
 `fix:buffer`, `fix:randombytes:main`, `fix:randombytes`, and `fix:vm:require:asn1`
 NPM scripts, that are all run in `postinstall`.
+
+TODO:
+- [ ] Convert changing imports to adding global module, ala `app/btoa-polyfill`
 
 ### NPM Modules with `.js`
 I have found that Nativescript fails to properly find NPM modules that end in `.js` (like `asn1.js`).
@@ -59,6 +62,8 @@ I assume it must think these are files instead of folders and fails to find them
 logged a bug yet in NativeScript for this behavior. The `fix:asn1:rename` and `fix:bn:rename`
 NPM sripts work around this by renaming troublesome files.
 
-### Exportable Keys
+### Browser Support
 
-Because of how webview-crypto works, crypto key's have to be imported as exportable. The reason is that we have to send the state of the crypto key from the web view back into the app via a string. So they need to be exportable so we can send them back. However, I think I have to change how webview-crypto works anyway, internally, so this will hopefully be fixed.
+The `window.btoa` function is used in passit-sdk-js, but is not supported in
+Nativescript, o we polyfil it (`app/btoa-polyfill.ts`). The same is true for
+the Text Encoding API. 
