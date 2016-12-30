@@ -11,7 +11,13 @@ The current status is that this isn't working on either iOS or Android.
 
 ## Usage
 
-First start passit-backend, then:
+First start `passit-backend`. Set the globally accessible URL for it in
+`./app/constants.ts`. It can't be `localhost` if using Genymotion.
+I used [ngrok](https://ngrok.com/) to expose the local port. If you are
+ running it locally, you can set it to `http://10.0.3.2:8000/api/`
+to use localhost. I  use ngrok if I wanna test it on a deployed device.
+
+then:
 
 ```bash
 tns install
@@ -21,6 +27,15 @@ tns run ios
 tns run android
 ```
 
+
+If you want to create an APK you can also run:
+
+```bash
+tns build android --release --key-store-path my-key.keystore  --key-store-alias prod --key-store-alias-password saul123 --key-store-password saul123
+```
+
+It will be available at `platforms/android/build/outputs/apk/passittest-release.apk`.
+
 If you change some node dependencies or some of the `postinstall` scripts, I recommend
 doing a clean re-install of the deps.
 
@@ -29,6 +44,10 @@ doing a clean re-install of the deps.
 rm -rf node_modules/ platforms/ hooks/; tns platform remove android; tns platform remove android
 tns install; tns platform add ios; tns platform add android
 ```
+
+## Timing
+
+This is the timing on my Nexus 6p running 7.1.1: ![](https://lh6.googleusercontent.com/vWb8lCS3gXXJv2mH5JcvinjIExiUcJKHekfXEiDpgAXB94mTEV0zV8u28ydaZZq8BXtBa3YZD6D_L7gEUb3Bt0EK10M8XN9BtHLy=w3840-h2048-rw)
 
 
 ## Blockers
@@ -66,4 +85,4 @@ NPM sripts work around this by renaming troublesome files.
 
 The `window.btoa` function is used in passit-sdk-js, but is not supported in
 Nativescript, o we polyfil it (`app/btoa-polyfill.ts`). The same is true for
-the Text Encoding API. 
+the Text Encoding API.

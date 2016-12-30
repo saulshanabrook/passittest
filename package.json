@@ -4,7 +4,7 @@
   "readme": "NativeScript Application",
   "repository": "<fill-your-repository-here>",
   "scripts": {
-    "postinstall": "npm run fix:randombytes:main; npm run fix:buffer; npm run fix:randombytes; npm run fix:vm:require:asn1; npm run fix:asn1:rename; npm run fix:bn:rename",
+    "postinstall": "npm run fix:randombytes:main; npm run fix:buffer; npm run fix:randombytes; npm run fix:vm:require:asn1; npm run fix:asn1:rename; npm run fix:bn:rename; npm run fix:pem-jwk",
     "fix:randombytes:main": "sed -i.bak 's/index.js/browser.js/' node_modules/randombytes/package.json",
     "fix:buffer": "npm run fix:buffer:require; npm run fix:buffer:install",
     "fix:buffer:install": "npm run fix:buffer:install:urlsafe-base64; npm run fix:buffer:install:asn1; npm run fix:buffer:install:fernet; npm run fix:buffer:install:simple-asym; npm run fix:buffer:install:passit-sdk-js; npm run fix:buffer:install:randombytes; npm run fix:buffer:install:pem-jwk",
@@ -38,7 +38,8 @@
     "fix:bn:rename": "npm run fix:bn:rename:folder; npm run fix:bn:rename:package; npm run fix:bn:rename:asn1",
     "fix:bn:rename:folder": "find node_modules/ -depth -type d -path '*/bn.js' -execdir mv bn.js  bnjs \\;",
     "fix:bn:rename:package": "find node_modules/ -path '*bnjs/package.json' -exec sed -i.bak 's/\"name\": \"bn.js\",/\"name\": \"bnjs\",/' {} \\;",
-    "fix:bn:rename:asn1": "find node_modules/ -type f -path '*/lib/asn1.js' -exec sed -i.bak 's/bn.js/bnjs/g' {} \\;"
+    "fix:bn:rename:asn1": "find node_modules/ -type f -path '*/lib/asn1.js' -exec sed -i.bak 's/bn.js/bnjs/g' {} \\;",
+    "fix:pem-jwk": "find node_modules/ -path '*.bin/pem-jwk' -exec rm {} \\;"
   },
   "nativescript": {
     "id": "org.nativescript.passittest",
@@ -59,6 +60,7 @@
     "@angular/platform-browser-dynamic": "2.2.4",
     "buffer": "5.0.2",
     "nativescript-angular": "1.2.0",
+    "nativescript-angular-snapshot": "1.2.0-5.2.361-2",
     "nativescript-angular-webview-crypto": "0.0.6",
     "nativescript-theme-core": "1.0.2",
     "passit-sdk-js": "0.1.1",

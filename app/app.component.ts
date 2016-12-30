@@ -3,10 +3,7 @@ import { Component } from "@angular/core";
 import 'nativescript-angular-webview-crypto';
 import './btoa-polyfill';
 import './text-encoding-polyfill';
-
-function deepStrictEqual(a, b) {
-  console.log(a, b);
-}
+import {API_URL} from "./constants";
 
 
 
@@ -55,9 +52,7 @@ export class AppComponent {
       const sdk = new PassitSDK();
 
       const Api = require("passit-sdk-js/js/api").default;
-      // for genymotion this refers to localhost
-      // http://stackoverflow.com/a/20257547/907060
-      sdk.api = new Api("http://10.0.3.2:8000/api/")
+      sdk.api = new Api(API_URL)
 
       const email = `test${new Date().getTime()}@test.com`;
       const password = "password";
