@@ -47,7 +47,7 @@ tns install; tns platform add ios; tns platform add android
 
 ## Timing
 
-This is the timing on my Nexus 6p running 7.1.1: ![](https://lh6.googleusercontent.com/vWb8lCS3gXXJv2mH5JcvinjIExiUcJKHekfXEiDpgAXB94mTEV0zV8u28ydaZZq8BXtBa3YZD6D_L7gEUb3Bt0EK10M8XN9BtHLy=w3840-h2048-rw)
+This is the timing on my Nexus 6p running 7.1.1: ![](Screenshot_20161230-145447.png)
 
 
 ## Blockers
