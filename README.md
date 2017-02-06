@@ -17,13 +17,12 @@ I used [ngrok](https://ngrok.com/) to expose the local port. If you are
  running it locally, you can set it to `http://10.0.3.2:8000/api/`
 to use localhost. I  use ngrok if I wanna test it on a deployed device.
 
+Also start Genymotion.
+
 then:
 
 ```bash
 tns install
-tns platform add ios
-tns platform add android
-tns run ios
 tns run android
 ```
 
